@@ -77,9 +77,10 @@ for team in data.index:
     
    
 off_prob_df.index = teams
+off_prob_df.index.name = 'Teams'
 off_prob_df.loc['AVG'] = round(off_prob_df.mean(), 3)
 
-off_prob_df.to_csv('Offensive Possesion Probabilities.csv')
+off_prob_df.to_csv('Offensive Possession Probabilities.csv')
 
 ### Opponent/Defensive Probabilities
 
@@ -131,6 +132,7 @@ for team in data.index:
                                                          ])
     
 def_prob_df.index = teams
+def_prob_df.index.name = 'Teams'
 def_prob_df.loc['AVG'] = round(def_prob_df.mean(), 3)
 
-def_prob_df.to_csv('Defensive Possesion Probabilities.csv')
+def_prob_df.to_csv('Defensive Possession Probabilities.csv')
