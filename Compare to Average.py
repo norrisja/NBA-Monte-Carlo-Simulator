@@ -7,9 +7,9 @@ Created on Sat Jan 16 21:43:01 2021
 
 import pandas as pd
 
-offense = pd.read_csv('Offensive Possesion Probabilities.csv',
+offense = pd.read_csv('Offensive Possession Probabilities.csv',
                       index_col = 'Teams')
-defense = pd.read_csv('Defensive Possesion Probabilities.csv',
+defense = pd.read_csv('Defensive Possession Probabilities.csv',
                       index_col= 'Teams')
 
 
