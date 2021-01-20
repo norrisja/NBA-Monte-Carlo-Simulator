@@ -12,9 +12,7 @@ offense = pd.read_csv('Offensive Possession Probabilities.csv',
 defense = pd.read_csv('Defensive Possession Probabilities.csv',
                       index_col= 'Teams')
 
-
 off_avg = offense.loc['AVG']
-pace = offense['Pace']
 offense.drop('AVG', inplace=True)
 
 off_vs_avg = offense - off_avg
@@ -26,7 +24,5 @@ defense.drop('AVG', inplace=True)
 
 def_vs_avg = defense - def_avg
 
-
 off_vs_avg.to_csv('Offense vs Avg.csv')
 def_vs_avg.to_csv('Defense vs Avg.csv')
-pace.to_csv('Pace.csv')
