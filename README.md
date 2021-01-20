@@ -5,8 +5,6 @@ Welcome to my first attempt at a monte carlo simulator. This was a project that 
 I relied heavily on the [basketball-reference-scraper](https://github.com/vishaalagartha/basketball_reference_scraper/blob/master/README.md) package developed by Vishaal Agartha. This package scrapes Basketball-Reference.com, and saved me many hours on this project. (Thank you Vishaal!)
 
 
-
-
 # Before you use the simulator
 
 1.) Run ProbabilityFinder.py
