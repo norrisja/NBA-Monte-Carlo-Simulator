@@ -8,10 +8,10 @@ Created on Wed Jan 13 01:13:36 2021
 import pandas as pd
 from basketball_reference_scraper.teams import get_team_stats, get_opp_stats, get_team_misc
 
-# List of NBA ref team abreviations, WAS does not work for some reason
+# List of NBA ref team abreviations
 teams = ['ATL', 'BRK', 'BOS', 'CHO', 'CHI', 'CLE', 'DAL', 'DEN', 'DET', 'GSW',
          'HOU', 'IND', 'LAC', 'LAL', 'MEM', 'MIA', 'MIL', 'MIN', 'NOP', 'NYK',
-         'OKC', 'ORL', 'PHI', 'PHO', 'POR', 'SAC', 'TOR', 'UTA']#, 'WAS']
+         'OKC', 'ORL', 'PHI', 'PHO', 'POR', 'SAC', 'SAS', 'TOR', 'UTA', 'WAS']
 
 df = pd.DataFrame()
 for team in teams:
@@ -26,20 +26,20 @@ for team in teams:
     
     # This pulls two TOV% variables because they have the same name on BB ref,
     # this issue is addressed below where I create the df def_tov_df to store this variable 
-    misc_stats = pd.DataFrame(get_team_misc(team, 2021)[['PACE', 'ORB%', 'TOV%', 'DRB%']])
+    misc_stats = pd.DataFrame(get_team_misc(team, 2021)[['PACE', 'FTr', 'ORB%', 'TOV%', 'DRB%']])
     misc_stats.columns = [team]
     df2 = pd.concat([df2, misc_stats], axis=1)
 
 combined_stats = pd.concat([df, df2])
 
-
+# Seperate the two defensive stats into a different dataframe
 def_tov_drb_df = combined_stats[-2:].copy()
 def_tov_drb_df.index = ['DEF_TOV%', 'DRB%']
 combined_stats = combined_stats[:-2]
 
 data = pd.concat([combined_stats, def_tov_drb_df]).transpose()
 
-columns = ['FGA', '3P%', '3PA', '2P%', '2PA', 'TOV%', 'ORB%', 'PACE']
+columns = ['FGA', '3P%', '3PA', '2P%', '2PA', 'FT%', 'TOV%', 'ORB%', 'PACE', 'FTr']
 data = data[columns]
 
 data['3pt Ratio'] = data['3PA'] / data['FGA']
@@ -52,8 +52,10 @@ off_prob_df = pd.DataFrame({'3pt Ratio': [],
                             '3P%': [],
                             '2P%': [],
                             'ORB%': [],
+                            'FT%': [],
                             'TOV%': [],
-                            'Pace': []
+                            'Pace': [],
+                            'FTr': []
                             })
  
 for team in data.index:
@@ -63,16 +65,20 @@ for team in data.index:
     three = data.loc[team,'3P%'] 
     two = data.loc[team,'2P%'] 
     orb = data.loc[team,'ORB%']  
+    ft_percent = data.loc[team, 'FT%']
     tov = data.loc[team,'TOV%']
     pace = data.loc[team, 'PACE']
+    ftr = data.loc[team, 'FTr']
     
     off_prob_df = pd.concat([off_prob_df, pd.DataFrame({'3pt Ratio': [three_ratio],
                                                         '2pt Ratio': [two_ratio],
                                                         '3P%': [three],
                                                         '2P%': [two],
                                                         'ORB%': [orb / 100],
+                                                        'FT%': [ft_percent],
                                                         'TOV%': [tov / 100],
-                                                        'Pace': [pace]}) 
+                                                        'Pace': [pace],
+                                                        'FTr': [ftr]}) 
                                                          ])
     
    
@@ -99,7 +105,7 @@ df7 = pd.concat([opp_df, def_tov_drb_df])
 
 opp_data = df7.transpose()
 
-opp_columns = ['OPP_FGA', 'OPP_3P%', 'OPP_3PA', 'OPP_2P%', 'OPP_2PA', 'DEF_TOV%', 'DRB%']
+opp_columns = ['OPP_FGA', 'OPP_3P%', 'OPP_3PA', 'OPP_2P%', 'OPP_2PA', 'DEF_TOV%', 'OPP_FT%', 'DRB%']
 opp_data = opp_data[opp_columns]
 
 opp_data['3pt Ratio'] = opp_data['OPP_3PA'] / opp_data['OPP_FGA']
@@ -111,7 +117,8 @@ def_prob_df = pd.DataFrame({'3pt Ratio': [],
                             '2pt Ratio': [],
                             '3P%': [],
                             '2P%': [],
-                            'TOV%': []
+                            'TOV%': [],
+                            'FT%': [],
                             })
 
 for team in data.index:
@@ -122,13 +129,15 @@ for team in data.index:
     two = opp_data.loc[team,'OPP_2P%'] 
     drb = opp_data.loc[team,'DRB%']  
     tov = opp_data.loc[team,'DEF_TOV%']
+    ft_percent = opp_data.loc[team, 'OPP_FT%']
     
     def_prob_df = pd.concat([def_prob_df, pd.DataFrame({'3pt Ratio': [three_ratio],
                                                         '2pt Ratio': [two_ratio],
                                                         '3P%': [three],
                                                         '2P%': [two],
                                                         'aORB%': [1 - (drb / 100)], # allowed orb%
-                                                        'TOV%': [tov / 100]}) 
+                                                        'TOV%': [tov / 100],
+                                                        'FT%': [ft_percent]}) 
                                                          ])
     
 def_prob_df.index = teams
