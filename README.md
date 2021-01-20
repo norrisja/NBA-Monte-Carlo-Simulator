@@ -4,21 +4,24 @@ Welcome to my first attempt at a monte carlo simulator. This was a project that 
 
 I relied heavily on the [basketball-reference-scraper](https://github.com/vishaalagartha/basketball_reference_scraper/blob/master/README.md) package developed by Vishaal Agartha. This package scrapes Basketball-Reference.com, and saved me many hours on this project. (Thank you Vishaal!)
 
-The biggest flaw in this model is that I don't have free throws built into the model. I'm not exactly sure how to encorporate free throws into my model, but the stats necessary (FT/FTA & FT%) are readily available from the same tables I am already scraping from. Hopefully, one day I will sit down and figure out how to include free throws.
+
 
 
 # Before you use the simulator
 
 1.) Run ProbabilityFinder.py
 
-  This script scrapes Basketball-Reference.com for the stats we need to simulate. This will create two csv files that we use in the other scripts.
+  This script scrapes Basketball-Reference.com for the stats we will use to simulate. This script cleans the data and creates two csv files; one with all teams unadjusted Offensive Possession Probabilities and the other with unadjusted Defensive Possession Probabilities.
 
-2.) Run Compare to Average
+2.) Run Compare to Average.py
   
-  Run this script to compare all the teams probabilities to the league averages. This is used to adjust the stats for the opponent. Again, this script creates two csv files that   are used in the simulation.
+  Run this script to compare all the teams probabilities to the league averages. This script takes the two csv files creates form Probability Finder and compares each team's stats to the league average.  Again, this script creates two csv files used for the simulation. These csv files will are used to adjust the stats for the opponent.
   
 
 # Running the simulation
 
   Currently, I have been running the simulation at the bottom of the Basketball Monte Carlo.py file, but I have hopes of making it more functional in the future.
   
+
+#### Disclaimer: 
+This model is purely for educational purposes, and I do not recommend using this model for betting or gambling purposes.
