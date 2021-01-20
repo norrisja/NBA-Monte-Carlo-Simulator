@@ -18,7 +18,6 @@ offense.drop('AVG', inplace=True)
 off_vs_avg = offense - off_avg
 off_vs_avg.drop('Pace', axis=1, inplace=True)
 
-
 def_avg = defense.loc['AVG']
 defense.drop('AVG', inplace=True)
 
