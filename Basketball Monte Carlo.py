@@ -27,7 +27,7 @@ off_prob.drop(['Pace', 'FTr'], axis=1, inplace=True)
 
 def run_simulation(team1, team2, simulations):
     
-    off = np.array(off_vs_avg.drop('FTr', axis=1).loc[team1])
+    off = np.array(off_vs_avg.drop(['FTr','Pace'], axis=1).loc[team1])
     deff = np.array(def_vs_avg.loc[team2])
     
     # Adjusted expectations for team 1 on offense
@@ -57,6 +57,7 @@ def run_simulation(team1, team2, simulations):
     # FT percent is just for team1
     ft_percent = expectations['FT%']
     
+    game_pace = float(off_vs_avg['Pace'][team1]) + float(off_vs_avg['Pace'][team2]) + float(pace.mean())
         
     points = 0
     for i in range(simulations):
@@ -100,7 +101,7 @@ def run_simulation(team1, team2, simulations):
                     shot_prob = np.random.rand()
                     
                     # Fouled and the the shot goes in
-                    if shot_prob<= (two/2): # Arbitrary- getting fouled halves the chance of a shot going in 
+                    if shot_prob<= (two/4): # The best research I could find was that in '05-'06, the league averaged 28.2 FG% on shooting fouls --> http://www.82games.com/andone.htm
                         
                         points += 2
                         
@@ -166,7 +167,7 @@ def run_simulation(team1, team2, simulations):
                     shot_prob = np.random.rand()
                     
                     # Fouled and the the shot goes in
-                    if shot_prob <= (three/2): # Arbitrary- getting fouled halves the chance of a shot going in 
+                    if shot_prob <= (three/4): 
                         
                         points += 3
                         free_throw = np.random.choice(range(0,2), p=[1-ft_percent, ft_percent])
@@ -210,7 +211,7 @@ def run_simulation(team1, team2, simulations):
     print(f'{team1} averaged {points_per_poss} points per possession')
     
     
-    off2 = np.array(off_vs_avg.drop('FTr', axis=1).loc[team2])
+    off2 = np.array(off_vs_avg.drop(['FTr','Pace'], axis=1).loc[team2])
     deff2 = np.array(def_vs_avg.loc[team1])
     
     expectations2 = (off2 + deff2) + off_prob.mean()
@@ -267,7 +268,7 @@ def run_simulation(team1, team2, simulations):
                     shot_prob = np.random.rand()
                     
                     # Fouled and the the shot goes in
-                    if shot_prob <= (two2/2): # Arbitrary- getting fouled halves the chance of a shot going in 
+                    if shot_prob <= (two2/4):
                         
                         team2_points += 2
                         
@@ -329,7 +330,7 @@ def run_simulation(team1, team2, simulations):
                     shot_prob = np.random.rand()
                     
                     # Fouled and the the shot goes in
-                    if shot_prob <= (three2/2): # Arbitrary- getting fouled halves the chance of a shot going in 
+                    if shot_prob <= (three2/4): 
                         
                         team2_points += 3
                         free_throw = np.random.choice(range(0,2), p=[1-ft_percent, ft_percent])
@@ -368,9 +369,9 @@ def run_simulation(team1, team2, simulations):
                 pos_end = 1            
     
     points_per_poss2 =  team2_points / simulations
-    print(f'{team2} averaged {points_per_poss2} points per possession')
     
-    print(f'{team1}: {points_per_poss * pace[team1]} | {team2}: {points_per_poss2 * pace[team2]}')
+    print(f'{team2} averaged {points_per_poss2} points per possession')
+    print(f'{team1}: {points_per_poss * game_pace} | {team2}: {points_per_poss2 * game_pace}')
 
 
 if __name__== '__main__':
