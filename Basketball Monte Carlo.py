@@ -400,7 +400,7 @@ if __name__== '__main__':
         games.append((games_today['participants.1.source.abbreviation'][i], games_today['participants.2.source.abbreviation'][i]))
         
     
-        
+    # dict used to convert SBR team abbreviations into NBA reference abbreviations. This may need to periodically be updated.   
     teams = {'ATL':'ATL', 'BKN': 'BRK', 'BOS': 'BOS', 'CHA': 'CHO', 'CHI': 'CHI', 
              'CLE': 'CLE', 'DAL': 'DAL', 'DEN': 'DEN', 'DET': 'DET', 'GSW': 'GSW',
              'HOU': 'HOU', 'IND': 'IND', 'LAC': 'LAC', 'LAL': 'LAL', 'MEM': 'MEM',
@@ -408,9 +408,9 @@ if __name__== '__main__':
              'OKC': 'OKC', 'ORL': 'ORL', 'PHI': 'PHI', 'PHX': 'PHO', 'POR': 'POR',
              'SAC': 'SAC', 'SAS': 'SAS', 'TOR': 'TOR', 'UTA': 'UTA', 'WAS': 'WAS'}
     
+    # Try to find a match in the dictionary and, if there is, replace the team with it's dict value
     games = [(teams.get(team[0], team[0]), teams.get(team[1], team[1])) for team in games]
         
-    
     predictions = pd.DataFrame()
     
     count = 0
