@@ -12,4 +12,4 @@ I relied heavily on the [basketball-reference-scraper](https://github.com/vishaa
   
 
 #### Disclaimer: 
-This model is purely for educational purposes, and I do not recommend using this model for betting or gambling purposes.
+This model is purely for my own educational purposes, and I do not recommend using this model for betting or gambling purposes.
