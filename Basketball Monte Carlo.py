@@ -4,8 +4,12 @@ Created on Tue Jan 12 23:38:46 2021
 
 @author: norri
 """
-import pandas as pd
+
 import numpy as np
+import pandas as pd
+from datetime import datetime
+from basketball_reference_scraper.teams import get_team_stats, get_opp_stats, get_team_misc
+from pysbr import NBA, EventsByDate
 
 off_prob = pd.read_csv('Offensive Possession Probabilities.csv',
                        index_col='Teams')
@@ -58,6 +62,7 @@ def run_simulation(team1, team2, simulations):
     ft_percent = expectations['FT%']
     
     game_pace = float(off_vs_avg['Pace'][team1]) + float(off_vs_avg['Pace'][team2]) + float(pace.mean())
+    print(f'Estimated Game Pace: {round(game_pace)}')
         
     points = 0
     for i in range(simulations):
@@ -375,5 +380,47 @@ def run_simulation(team1, team2, simulations):
 
 
 if __name__== '__main__':
-    run_simulation('BOS','LAL', 10000)
+    today = datetime.today().strftime('%Y-%m-%d')
+    today = datetime.strptime(today, '%Y-%m-%d')
+
+    # Get today's games using the pysbr sportsbook api
+    nba = NBA()
+    e = EventsByDate(nba.league_id, today)
+
+    cols = ['event id', 'event status',
+        'participants.1.source.abbreviation', 'participants.1.participant id',
+        'participants.2.source.abbreviation', 'participants.2.participant id']
+
+    games_today = e.dataframe()[cols]
+    games_today
+
+    games = []
+
+    for i in range(len(games_today)):
+        games.append((games_today['participants.1.source.abbreviation'][i], games_today['participants.2.source.abbreviation'][i]))
+        
+    
+        
+    teams = {'ATL':'ATL', 'BKN': 'BRK', 'BOS': 'BOS', 'CHA': 'CHO', 'CHI': 'CHI', 
+             'CLE': 'CLE', 'DAL': 'DAL', 'DEN': 'DEN', 'DET': 'DET', 'GSW': 'GSW',
+             'HOU': 'HOU', 'IND': 'IND', 'LAC': 'LAC', 'LAL': 'LAL', 'MEM': 'MEM',
+             'MIA': 'MIA', 'MIL': 'MIL', 'MIN': 'MIN', 'NOP': 'NOP', 'NYK': 'NYK',
+             'OKC': 'OKC', 'ORL': 'ORL', 'PHI': 'PHI', 'PHX': 'PHO', 'POR': 'POR',
+             'SAC': 'SAC', 'SAS': 'SAS', 'TOR': 'TOR', 'UTA': 'UTA', 'WAS': 'WAS'}
+    
+    games = [(teams.get(team[0], team[0]), teams.get(team[1], team[1])) for team in games]
+        
+    
+    predictions = pd.DataFrame()
+    
+    count = 0
+    for game in games:
+        team1 = game[0]
+        team2 = game[1]
+        
+        df = run_simulation(team1, team2, 10000)
+        
+        predictions = pd.concat([predictions, df])
+
+    predictions.to_csv("Today's Predictions.csv")    
     
