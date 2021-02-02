@@ -2,23 +2,13 @@
 
 Welcome to my first attempt at a monte carlo simulator. This was a project that I undertook to learn more about using python for simulations. My simulation is fairly basic, but at the very least it can produce reasonable predictions. I plan to test the simulator over a period of time to see if the model can accurately predict the outcome of games.
 
-I relied heavily on the [basketball-reference-scraper](https://github.com/vishaalagartha/basketball_reference_scraper/blob/master/README.md) package developed by Vishaal Agartha. This package scrapes Basketball-Reference.com, and saved me many hours on this project. (Thank you Vishaal!)
-
-
-# Before you use the simulator
-
-1.) Run ProbabilityFinder.py
-
-  This script scrapes Basketball-Reference.com for the stats we will use to simulate. This script cleans the data and creates two csv files; one with all teams unadjusted Offensive Possession Probabilities and the other with unadjusted Defensive Possession Probabilities.
-
-2.) Run Compare to Average.py
-  
-  Run this script to compare all the teams probabilities to the league averages. This script takes the two csv files creates form Probability Finder and compares each team's stats to the league average.  Again, this script creates two csv files used for the simulation. These csv files will are used to adjust the stats for the opponent.
-  
+I relied heavily on the [basketball-reference-scraper](https://github.com/vishaalagartha/basketball_reference_scraper/blob/master/README.md) package developed by Vishaal Agartha. This package scrapes Basketball-Reference.com, and saved me many hours on this project. I also used [PySBR](https://github.com/JeMorriso/PySBR/blob/main/README.md) package developed by Jeremy Morrison to get the games for today. (Thank you Vishaal and Jeremy!)
 
 # Running the simulation
 
-  Currently, I have been running the simulation at the bottom of the Basketball Monte Carlo.py file, but I have hopes of making it more functional in the future.
+  The best way to run the simulation is to use the master.py script. The script is designed to pull the games for today and run them all through the simulation. If you are interested in simulating a random game, I would recommend clearing out the main() and use one line of code - "run_simulation(team1, team2, numbers_of_simulations)".
+
+  The other scripts are smaller chunks of the master.py script. The scripts are designed to be run individually to perform the same function as the master script. Those files were the original design of my project, but I decided to create the master script for functionality. I plan to leave the files up incase anyone would is interested in inspecting a particular part of the project. If you were to run the scripts individually, the order to run them is probability finder -> compare to average -> monte carlo.
   
 
 #### Disclaimer: 
