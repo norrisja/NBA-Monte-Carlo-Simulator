@@ -4,6 +4,8 @@ Welcome to my first attempt at a monte carlo simulator. This was a project that 
 
 I relied heavily on the [basketball-reference-scraper](https://github.com/vishaalagartha/basketball_reference_scraper/blob/master/README.md) package developed by Vishaal Agartha. This package scrapes Basketball-Reference.com, and saved me many hours on this project. I also used [PySBR](https://github.com/JeMorriso/PySBR/blob/main/README.md) package developed by Jeremy Morrison to get the games for today. (Thank you Vishaal and Jeremy!)
 
+When I have time, I plan to make the code more modular, as there are large chunks of repeatable code in my simulation script.
+
 # Running the simulation
 
   The best way to run the simulation is to use the master.py script. The script is designed to pull the games for today and run them all through the simulation. If you are interested in simulating a random game, I would recommend clearing out the main() and use one line of code - "run_simulation(team1, team2, numbers_of_simulations)".
