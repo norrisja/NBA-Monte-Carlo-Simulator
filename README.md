@@ -4,7 +4,7 @@ Welcome to my first attempt at a monte carlo simulator. This was a project that 
 
 I relied heavily on the [basketball-reference-scraper](https://github.com/vishaalagartha/basketball_reference_scraper/blob/master/README.md) package developed by Vishaal Agartha. This package scrapes Basketball-Reference.com, and saved me many hours on this project. I also used [PySBR](https://github.com/JeMorriso/PySBR/blob/main/README.md) package developed by Jeremy Morrison to get the games for today. (Thank you Vishaal and Jeremy!)
 
-When I have time, I plan to make the code more modular, as there are large chunks of repeatable code in my simulation script.
+I realize that some of this code is quite ugly. This is due to the fact that I started this project with only 5 months of programming experience. When I have time, I plan to make the code more modular, as there are large chunks of repeatable code in my simulation script.
 
 # Running the simulation
 
