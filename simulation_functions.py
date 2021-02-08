@@ -1,3 +1,6 @@
+import numpy as np
+import pandas as pd
+
 def foul(ft_per_Xpt_fga):
     """ Determines if there was a foul on a given possession.
     
