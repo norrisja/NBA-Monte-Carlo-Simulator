@@ -4,14 +4,15 @@ Welcome to my first attempt at a monte carlo simulator. This was a project that 
 
 This project would have much harder with out the [basketball-reference-scraper](https://github.com/vishaalagartha/basketball_reference_scraper/blob/master/README.md) package developed by Vishaal Agartha. This package scrapes Basketball-Reference.com, and saved me many hours on this project. I also use the [PySBR](https://github.com/JeMorriso/PySBR/blob/main/README.md) package developed by Jeremy Morrison to get the games for today. (Thank you Vishaal and Jeremy!)
 
-I realize that some of this code is quite ugly. This is due to the fact that I started this project with only 5 months of programming experience. When I have time, I plan to make the code more modular, as there are large chunks of repeatable code in my simulation script.
+The next step in my project is to automatically compare my predicted outcomes with betting lines to find potential value. 
 
 # Running the simulation
 
-  The best way to run the simulation is to use the master.py script. The script is designed to pull the games for today and run them all through the simulation. If you are interested in simulating a random game, I would recommend clearing out the main() and use one line of code - "run_simulation(team1, team2, numbers_of_simulations)".
+  The best way to run the simulation is to use the master.py script. The script is designed to pull the games for today and run them all through the simulation. If you are interested in simulating a random game, I would recommend clearing out the main() and use one line of code -> "run_simulation(team1, team2, off_vs_avg, def_vs_avg, off_prob, 10000)".
 
   The other scripts are smaller chunks of the master.py script. The scripts are designed to be run individually to perform the same function as the master script. Those files were the original design of my project, but I decided to create the master script for functionality. I plan to leave the files up incase anyone would is interested in inspecting a particular part of the project. If you were to run the scripts individually, the order to run them is probability finder -> compare to average -> monte carlo.
   
+My last update was to modularize my simulation code. The functions can be found in the simulation_function.py script. This is the file that the master.py script imports the run_simulation function from.   
 
 #### Disclaimer: 
 This model is purely for my own educational purposes, and I do not recommend using this model for betting or gambling purposes.
