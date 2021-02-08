@@ -2,7 +2,7 @@
 
 Welcome to my first attempt at a monte carlo simulator. This was a project that I undertook to learn more about using python for simulations. My simulation is fairly basic, but at the very least it can produce reasonable predictions. I plan to test the simulator over a period of time to see if the model can accurately predict the outcome of games.
 
-I relied heavily on the [basketball-reference-scraper](https://github.com/vishaalagartha/basketball_reference_scraper/blob/master/README.md) package developed by Vishaal Agartha. This package scrapes Basketball-Reference.com, and saved me many hours on this project. I also used [PySBR](https://github.com/JeMorriso/PySBR/blob/main/README.md) package developed by Jeremy Morrison to get the games for today. (Thank you Vishaal and Jeremy!)
+This project would have much harder with out the [basketball-reference-scraper](https://github.com/vishaalagartha/basketball_reference_scraper/blob/master/README.md) package developed by Vishaal Agartha. This package scrapes Basketball-Reference.com, and saved me many hours on this project. I also use the [PySBR](https://github.com/JeMorriso/PySBR/blob/main/README.md) package developed by Jeremy Morrison to get the games for today. (Thank you Vishaal and Jeremy!)
 
 I realize that some of this code is quite ugly. This is due to the fact that I started this project with only 5 months of programming experience. When I have time, I plan to make the code more modular, as there are large chunks of repeatable code in my simulation script.
 
